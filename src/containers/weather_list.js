@@ -7,14 +7,17 @@ class WeatherList extends Component {
  RenderWeather(cityData){
     const name = cityData.city.name;    
     const temps = cityData.list.map(weather => weather.main.temp);
+    const presures = cityData.list.map(weather => weather.main.pressure);
+    const humidities = cityData.list.map(weather => weather.main.humidity);
+    
     //esta definicion dice que "a queda item "list" en cityData, voy a llamarlo weather, y quiero en esta funcion retornar
     //lo que hay dentro de main y temp
     return (
             <tr key={name}>
                 <td>{name}</td>
-                <td>
-                    <Chart data={temps} color='red'/>
-                </td>
+                <td><Chart data={temps} color='red' units ='K'/></td>
+                <td><Chart data={presures} color='green'units='hPa'/></td>
+                <td><Chart data={humidities} color='black' units='%'/></td>
             </tr>
         );
     }
@@ -25,9 +28,9 @@ class WeatherList extends Component {
             <thead>
                 <tr>
                     <th>City</th>
-                    <th>Temperature</th>
-                    <th>Presure</th>
-                    <th>Humidity</th>
+                    <th>Temperature (K)</th>
+                    <th>Presure (Hpa)</th>
+                    <th>Humidity (%)</th>
                 </tr>
             </thead>
             <tbody>
